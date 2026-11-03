@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ドイツ音名変換</title>
+
+<style>
+body{
+    font-family:sans-serif;
+    background:#f3f3f3;
+    padding:40px;
+}
+
+.box{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+}
+
+label{
+    display:block;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+select,button{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    font-size:16px;
+    border-radius:8px;
+}
+
+button{
+    background:#0078d7;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.result{
+    margin-top:30px;
+    padding:20px;
+    background:#eef6ff;
+    border-radius:10px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>ドイツ音名変換</h1>
+
+<label>管の種類</label>
+<select id="instrument">
+    <option>C管</option>
+    <option>B♭管</option>
+    <option>F管</option>
+    <option>Es管</option>
+</select>
+
+<label>音</label>
+<select id="note">
+    <option>ド</option>
+    <option>レ</option>
+    <option>ミ</option>
+    <option>ファ</option>
+    <option>ソ</option>
+    <option>ラ</option>
+    <option>シ</option>
+</select>
+
+<label>記号</label>
+<select id="accidental">
+    <option value="normal">普通</option>
+    <option value="sharp">シャープ</option>
+    <option value="flat">フラット</option>
+</select>
+
+<button onclick="convert()">変換する</button>
+
+<div class="result" id="result">
+ここに表示
+</div>
+
+</div>
+
+<script>
+
+function convert(){
+
+    const note = document.getElementById("note").value;
+    const accidental = document.getElementById("accidental").value;
+
+    const base = {
+        "ド":"C",
+        "レ":"D",
+        "ミ":"E",
+        "ファ":"F",
+        "ソ":"G",
+        "ラ":"A",
+        "シ":"H"
+    };
+
+    const sharp = {
+        "C":"Cis",
+        "D":"Dis",
+        "E":"Eis",
+        "F":"Fis",
+        "G":"Gis",
+        "A":"Ais",
+        "H":"His"
+    };
+
+    const flat = {
+        "C":"Ces",
+        "D":"Des",
+        "E":"Es",
+        "F":"Fes",
+        "G":"Ges",
+        "A":"As",
+        "H":"Hes"
+    };
+
+    let result = base[note];
+
+    if(accidental === "sharp"){
+        result = sharp[result];
+    }
+
+    if(accidental === "flat"){
+        result = flat[result];
+    }
+
+    document.getElementById("result").textContent = result;
+}
+
+</script>
+
+</body>
+</html>
